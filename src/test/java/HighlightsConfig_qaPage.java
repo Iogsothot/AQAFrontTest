@@ -121,8 +121,23 @@ public class HighlightsConfig_qaPage {
             xpath = "//*[@id=\"root\"]/div[1]/div/div[1]/div[2]/div/div[4]/div/div[1]"
     )
     private static WebElement assertWhatAddSport;
+    @FindBy(
+            xpath = "//*[@id=\"root\"]/div[1]/div/div[2]/div[3]/div/div/div/div[1]/div[2]/div/button[7]"
+    )
+    private static WebElement assertWhatAddLanguage;
+    @FindBy(
+            xpath = "//*[@id=\"root\"]/div[1]/div/div[2]/div[3]/div/div/div/div[1]/div[2]/div/button[6]"
+    )
+    private static WebElement assertWhatDeleteLanguage;
+    @FindBy(
+            xpath = "//*[@id=\"root\"]/div[1]/div/div[2]/div[4]/div/div[2]/div[2]/button"
+    )
+    private static WebElement copyEventFromDefault;
 
-
+    @FindBy(
+            xpath = "//*[@id=\"root\"]/div[1]/div/div[2]/div[5]/div/div/div[1]/div/div[5]/div"
+    )
+    private static WebElement checkEvent;
 
     public static void clickAddSportButton() {
         addSportButton.click();
@@ -244,4 +259,22 @@ public class HighlightsConfig_qaPage {
         String sportAdded = assertWhatAddSport.getText();
         return sportAdded;
     }
+    public String assertTextWhatAddLanguage() {
+        String languageAdded = assertWhatAddLanguage.getText();
+        return languageAdded;
+    }
+    public String assertTextWhatDeleteLanguage() {
+        String languageDelete = assertWhatDeleteLanguage.getText();
+        return languageDelete;
+    }
+    public String checkTextEvent() {
+        String checkTextEvent = checkEvent.getText();
+        return checkTextEvent;
+    }
+    public static void clickCopyEventFromDefault() {
+        copyEventFromDefault.click();
+    }
+
+
+
 }

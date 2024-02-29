@@ -77,6 +77,8 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickAddIsSafe2();
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickSaveConfig();
+        String checkTextEvent = highlights.checkTextEvent();
+        Assertions.assertEquals("Soccer", checkTextEvent);
     }
 
     @Test
@@ -100,15 +102,26 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickAddLanguageCustom();
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
+        String languageAdded = highlights.assertTextWhatAddLanguage();
+        Assertions.assertEquals("Albanian", languageAdded);
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickEditeLanguageCustom();
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickDeleteLanguageCustom();
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickSelectLanguageCustomDelete1();
-        HighlightsConfig_qaPage.clickSelectLanguageCustomDelete2();
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickDeleteButtonLanguageCustom();
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
+        String languageDelete = highlights.assertTextWhatDeleteLanguage();
+        Assertions.assertEquals("Albanian", languageDelete);
     }
+    @Test
+    public void copyEvent() {
+        HighlightsConfig_qaPage.clickSelectLanguage();
+        HighlightsConfig_qaPage.clickCopyEventFromDefault();
+        String checkTextEvent = highlights.checkTextEvent();
+        Assertions.assertEquals("Soccer", checkTextEvent);
+    }
+
 }
