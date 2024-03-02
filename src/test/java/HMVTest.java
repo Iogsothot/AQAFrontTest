@@ -10,6 +10,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 public class HMVTest {
     public static LoginPage loginPage;
     public static HighlightsConfig_qaPage highlights;
@@ -25,7 +28,7 @@ public class HMVTest {
         driver.get(ConfProperties.getProperty("loginpage"));
     }
 
-    @AfterAll
+   @AfterAll
     public static void destroy() {
         driver.quit();
     }
@@ -41,6 +44,8 @@ public class HMVTest {
 
     @Test
     public void addSportTest() throws InterruptedException {
+        Thread.sleep(1000l);
+        int sportNumber = HighlightsConfig_qaPage.checkSportList();
         HighlightsConfig_qaPage.clickSelectLanguage();
         HighlightsConfig_qaPage.clickAddSportButton();
         HighlightsConfig_qaPage.clickSelectSportButton();
@@ -49,44 +54,54 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickSaveConfig();
         Thread.sleep(10000L);
         String sport = highlights.assertTextWhatAddSport();
-        Assertions.assertEquals("Archery", sport);
+        assertEquals("Archery", sport);
+        int sportNumber2 = HighlightsConfig_qaPage.checkSportList();
+        assertEquals(sportNumber + 1,sportNumber2);
         HighlightsConfig_qaPage.clickDisableFourSport();
         HighlightsConfig_qaPage.clickDeleteDisableFourSport();
         Thread.sleep(10000L);
         HighlightsConfig_qaPage.clickSaveConfig();
+        assertEquals(sportNumber ,sportNumber2 - 1);
     }
 
     @Test
     public void addEventTest() throws InterruptedException {
+        String numberOfSportEvent1 = highlights.checkNumberOfEventInSport();
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickToDate();
         HighlightsConfig_qaPage.inputToDate(ConfProperties.getProperty("to"));
         HighlightsConfig_qaPage.clickFromDate();
         HighlightsConfig_qaPage.inputFromDate(ConfProperties.getProperty("from"));
+        String numberOfSportEvent2 = highlights.checkNumberOfEventInSport();
+        assertNotEquals(numberOfSportEvent1,numberOfSportEvent2);
         HighlightsConfig_qaPage.inputEvent(ConfProperties.getProperty("team"));
         HighlightsConfig_qaPage.clickSearchEventButton();
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickAddEvent();
         HighlightsConfig_qaPage.clickAddEvent();
+        int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
+        assertEquals(2 ,eventNumber1);
         HighlightsConfig_qaPage.clickAddIsPromo1();
         HighlightsConfig_qaPage.clickAddIsPromo2();
+        Thread.sleep(10000L);
         HighlightsConfig_qaPage.clickSaveConfig();
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickDeleatIsPromo2();
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickAddIsSafe2();
-        Thread.sleep(1000L);
+        Thread.sleep(10000L);
         HighlightsConfig_qaPage.clickSaveConfig();
         String checkTextEvent = highlights.checkTextEvent();
-        Assertions.assertEquals("Soccer", checkTextEvent);
+        assertEquals("Soccer", checkTextEvent);
     }
-
     @Test
     public void deleteEventTest() throws InterruptedException {
         HighlightsConfig_qaPage.clickDeleteEvent();
         HighlightsConfig_qaPage.clickDeleteEvent();
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickSaveConfig();
+        int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
+        assertEquals(0 ,eventNumber1);
     }
 
     @Test
@@ -103,7 +118,7 @@ public class HMVTest {
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
         String languageAdded = highlights.assertTextWhatAddLanguage();
-        Assertions.assertEquals("Albanian", languageAdded);
+        assertEquals("ALBANIAN", languageAdded);
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickEditeLanguageCustom();
         Thread.sleep(100L);
@@ -114,14 +129,19 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickDeleteButtonLanguageCustom();
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
         String languageDelete = highlights.assertTextWhatDeleteLanguage();
-        Assertions.assertEquals("Albanian", languageDelete);
+        assertEquals("ALBANIAN", languageDelete);
     }
+
     @Test
     public void copyEvent() {
+        HighlightsConfig_qaPage.clickSelectLanguageDefault();
+        int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
         HighlightsConfig_qaPage.clickSelectLanguage();
         HighlightsConfig_qaPage.clickCopyEventFromDefault();
+        int eventNumber2 = HighlightsConfig_qaPage.checkEventList();
+        assertEquals(eventNumber1 ,eventNumber2);
         String checkTextEvent = highlights.checkTextEvent();
-        Assertions.assertEquals("Soccer", checkTextEvent);
+        assertEquals("Soccer", checkTextEvent);
     }
 
 }
