@@ -1,6 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,7 +18,7 @@ public class HMVTest {
     public static LoginPage loginPage;
     public static HighlightsConfig_qaPage highlights;
     public static WebDriver driver = new ChromeDriver();
-
+    private static final Logger logger = LoggerFactory.getLogger(HMVTest.class);
     @BeforeAll
     public static void main() {
         WebDriverManager.chromedriver().setup();
@@ -40,6 +41,7 @@ public class HMVTest {
         LoginPage.inputLogin(ConfProperties.getProperty("login"));
         LoginPage.inputPasswd(ConfProperties.getProperty("password"));
         LoginPage.clickLoginBtn();
+        logger.info("Авторизация по данным проведена");
     }
 
     @Test
@@ -51,7 +53,9 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickSelectSportButton();
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickApplySportAdd();
+        logger.info("Добавлен спорт Archery");
         HighlightsConfig_qaPage.clickSaveConfig();
+        logger.info("Изменения сохранены");
         Thread.sleep(10000L);
         String sport = highlights.assertTextWhatAddSport();
         assertEquals("Archery", sport);
@@ -59,9 +63,11 @@ public class HMVTest {
         assertEquals(sportNumber + 1,sportNumber2);
         HighlightsConfig_qaPage.clickDisableFourSport();
         HighlightsConfig_qaPage.clickDeleteDisableFourSport();
+        logger.info("Удален спорт Archery");
         Thread.sleep(10000L);
         HighlightsConfig_qaPage.clickSaveConfig();
         assertEquals(sportNumber ,sportNumber2 - 1);
+        logger.info("Изменения сохранены");
     }
 
     @Test
@@ -72,13 +78,18 @@ public class HMVTest {
         HighlightsConfig_qaPage.inputToDate(ConfProperties.getProperty("to"));
         HighlightsConfig_qaPage.clickFromDate();
         HighlightsConfig_qaPage.inputFromDate(ConfProperties.getProperty("from"));
+        logger.info("Изменения даты произведены");
         String numberOfSportEvent2 = highlights.checkNumberOfEventInSport();
         assertNotEquals(numberOfSportEvent1,numberOfSportEvent2);
+        logger.info("Количество ивентов пересчитанно");
         HighlightsConfig_qaPage.inputEvent(ConfProperties.getProperty("team"));
         HighlightsConfig_qaPage.clickSearchEventButton();
+        logger.info("Выведены ивенты выбранной команды");
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickAddEvent();
         HighlightsConfig_qaPage.clickAddEvent();
+        String checkTextEvent = highlights.checkTextEvent();
+        assertEquals("Soccer", checkTextEvent);
         int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
         assertEquals(2 ,eventNumber1);
         HighlightsConfig_qaPage.clickAddIsPromo1();
@@ -91,8 +102,7 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickAddIsSafe2();
         Thread.sleep(10000L);
         HighlightsConfig_qaPage.clickSaveConfig();
-        String checkTextEvent = highlights.checkTextEvent();
-        assertEquals("Soccer", checkTextEvent);
+        logger.info("Проведены операции с тэгами");
     }
     @Test
     public void deleteEventTest() throws InterruptedException {
@@ -102,6 +112,7 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickSaveConfig();
         int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
         assertEquals(0 ,eventNumber1);
+        logger.info("Список ивентов пуст");
     }
 
     @Test
@@ -119,6 +130,7 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
         String languageAdded = highlights.assertTextWhatAddLanguage();
         assertEquals("ALBANIAN", languageAdded);
+        logger.info("Добавлен новые языки");
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickEditeLanguageCustom();
         Thread.sleep(100L);
@@ -130,6 +142,7 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
         String languageDelete = highlights.assertTextWhatDeleteLanguage();
         assertEquals("ALBANIAN", languageDelete);
+        logger.info("Удаленн один из новых язык");
     }
 
     @Test
@@ -142,6 +155,7 @@ public class HMVTest {
         assertEquals(eventNumber1 ,eventNumber2);
         String checkTextEvent = highlights.checkTextEvent();
         assertEquals("Soccer", checkTextEvent);
+        logger.info("Список ивентов азербайджанского  совпадает с дефолтным");
     }
 
 }
