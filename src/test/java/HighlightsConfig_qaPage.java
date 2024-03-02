@@ -1,14 +1,20 @@
+import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class HighlightsConfig_qaPage {
-    public WebDriver driver;
+    public static WebDriver driver;
+
     public HighlightsConfig_qaPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+
     @FindBy(
             xpath = "//*[contains(text(), 'Add sport')]/.."
     )
@@ -29,6 +35,10 @@ public class HighlightsConfig_qaPage {
             xpath = "//*[@id=\"root\"]/div[1]/div/div[2]/div[3]/div/div/div/div[1]/div[2]/div/button[3]"
     )
     private static WebElement selectLanguage;
+    @FindBy(
+            xpath = "//*[@id=\"root\"]/div[1]/div/div[2]/div[3]/div/div/div/div[1]/div[2]/div/button[1]"
+    )
+    private static WebElement selectLanguageDefault;
     @FindBy(
             xpath = "//*[contains(@id, ':rb:')]"
     )
@@ -86,15 +96,15 @@ public class HighlightsConfig_qaPage {
     )
     private static WebElement openListLanguageCustom;
     @FindBy(
-            xpath = "/html/body/div[5]/div[3]/div/div[2]/div[3]/div[1]/div/span"
+            xpath = "/html/body/div[9]/div[3]/div/div[2]/div[3]/div[1]/div/span"
     )
     private static WebElement selectLanguageCustom1;
     @FindBy(
-            xpath = "/html/body/div[5]/div[3]/div/div[2]/div[3]/div[2]/div/span"
+            xpath = "/html/body/div[9]/div[3]/div/div[2]/div[3]/div[2]/div/span"
     )
     private static WebElement selectLanguageCustom2;
     @FindBy(
-            xpath = "/html/body/div[5]/div[3]/div/div[3]/button[2]"
+            xpath = "/html/body/div[9]/div[3]/div/div[3]/button[2]"
     )
     private static WebElement addLanguageCustom;
     @FindBy(
@@ -106,7 +116,7 @@ public class HighlightsConfig_qaPage {
     )
     private static WebElement deleteLanguageCustom;
     @FindBy(
-            xpath = "/html/body/div[7]/div[3]/div/div[2]/div[3]/div[1]/div/span"
+            xpath = "/html/body/div[9]/div[3]/div/div[2]/div[3]/div[1]/div/span"
     )
     private static WebElement selectLanguageCustomDelete1;
     @FindBy(
@@ -114,7 +124,7 @@ public class HighlightsConfig_qaPage {
     )
     private static WebElement selectLanguageCustomDelete2;
     @FindBy(
-            xpath = "/html/body/div[7]/div[3]/div/div[3]/button[2]"
+            xpath = "/html/body/div[9]/div[3]/div/div[3]/button[2]"
     )
     private static WebElement deleteButtonLanguageCustom;
     @FindBy(
@@ -138,7 +148,20 @@ public class HighlightsConfig_qaPage {
             xpath = "//*[@id=\"root\"]/div[1]/div/div[2]/div[5]/div/div/div[1]/div/div[5]/div"
     )
     private static WebElement checkEvent;
+    @FindBy(
+            xpath = "//*[@class='ColumnWrapperstyles__ColumnWrapper-sc-1qm7qn3-0 Nfghw']"
+    )
+    private static WebElement checkTags;
+//*[@id="root"]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[2]/span
+    @FindBy(
+            xpath = "//*[@id=\"root\"]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[2]/span']"
+    )
+    private static WebElement checkNumberOfEvent;
 
+    @FindBy(
+            xpath = "//*[@class='SportTreeItemstyles__CountWrapper-sc-5zup7e-1 liwxjR']"
+    )
+    private static WebElement getNumberOfEventInSport;
     public static void clickAddSportButton() {
         addSportButton.click();
     }
@@ -154,7 +177,9 @@ public class HighlightsConfig_qaPage {
     public static void clickSelectLanguage() {
         selectLanguage.click();
     }
-
+    public static void clickSelectLanguageDefault() {
+        selectLanguageDefault.click();
+    }
     public static void clickSaveConfig() {
         saveConfig.click();
     }
@@ -259,20 +284,41 @@ public class HighlightsConfig_qaPage {
         String sportAdded = assertWhatAddSport.getText();
         return sportAdded;
     }
+
     public String assertTextWhatAddLanguage() {
         String languageAdded = assertWhatAddLanguage.getText();
         return languageAdded;
     }
+    public String checkNumberOfSportEvent() {
+        String NumberOfSportEvent = checkNumberOfEvent.getText();
+        return NumberOfSportEvent;
+    }
+
     public String assertTextWhatDeleteLanguage() {
         String languageDelete = assertWhatDeleteLanguage.getText();
         return languageDelete;
     }
+
     public String checkTextEvent() {
         String checkTextEvent = checkEvent.getText();
         return checkTextEvent;
     }
+
     public static void clickCopyEventFromDefault() {
         copyEventFromDefault.click();
+    }
+
+    public String checkNumberOfEventInSport() {
+        String checkNumberOfEvent = getNumberOfEventInSport.getText();
+        return checkNumberOfEvent;
+    }
+    public static int checkSportList() {
+        List<WebElement> sportColumn = driver.findElements(By.xpath("//*[@class='ColumnWrapperstyles__ColumnWrapper-sc-1qm7qn3-0 Nfghw']"));
+        return sportColumn.size();
+    }
+    public static int checkEventList() {
+        List<WebElement> sportColumn = driver.findElements(By.xpath("//*[@class='RowWrapperstyles__RowWrapper-sc-gthg2c-0 bVmYst']"));
+        return sportColumn.size();
     }
 
 
