@@ -4,12 +4,24 @@ plugins {
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
+def allureVersion = "2.25.0"
+def aspectJVersion = '1.9.21'
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = true
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    agent "org.aspectj:aspectjweaver:$aspectJVersion"
+    testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
+    testImplementation "io.qameta.allure:allure-junit5"
     testImplementation("io.github.bonigarcia:webdrivermanager:5.7.0")
     testImplementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
     testImplementation platform('org.junit:junit-bom:5.9.1')
@@ -18,4 +30,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
 }

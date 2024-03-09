@@ -1,10 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -22,9 +19,12 @@ public class HMVTest {
         highlights = new HighlightsConfig_qaPage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get(ConfProperties.getProperty("loginpage"));
+        //driver.get(ConfProperties.getProperty("loginpage"));
     }
+    @BeforeEach
+    public static void auth(){
 
+    }
     @AfterAll
     public static void destroy() {
         driver.quit();
