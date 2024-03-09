@@ -13,24 +13,22 @@ public class HMVTest {
     public static WebDriver driver = new ChromeDriver();
 
     @BeforeAll
-    public static void main() {
+    public static void main() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         loginPage = new LoginPage(driver);
         highlights = new HighlightsConfig_qaPage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         //driver.get(ConfProperties.getProperty("loginpage"));
+        HighlightsConfig_qaPageSteps.logInStep();
     }
-    @BeforeEach
-    public static void auth(){
 
-    }
     @AfterAll
     public static void destroy() {
         driver.quit();
     }
 
-    @Test
+   // @Test
     public void loginTest() throws InterruptedException {
         Thread.sleep(1000l);
         LoginPage.clickCookiesBtn();
@@ -39,8 +37,8 @@ public class HMVTest {
         LoginPage.clickLoginBtn();
     }
 
-    @Test
-    public void addSportTest() throws InterruptedException {
+   // @Test
+    public void addSportTest1() throws InterruptedException {
         HighlightsConfig_qaPage.clickSelectLanguage();
         HighlightsConfig_qaPage.clickAddSportButton();
         HighlightsConfig_qaPage.clickSelectSportButton();
@@ -55,9 +53,13 @@ public class HMVTest {
         Thread.sleep(10000L);
         HighlightsConfig_qaPage.clickSaveConfig();
     }
-
-    @Test
-    public void addEventTest() throws InterruptedException {
+     @Test
+    public void addSportTest() throws InterruptedException {
+        HighlightsConfig_qaPageSteps.addSportStep();
+         HighlightsConfig_qaPageSteps.deleteAddSportStep();
+     }
+    //@Test
+    public void addEventTest1() throws InterruptedException {
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickToDate();
         HighlightsConfig_qaPage.inputToDate(ConfProperties.getProperty("to"));
@@ -78,17 +80,26 @@ public class HMVTest {
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickSaveConfig();
     }
-
     @Test
-    public void deleteEventTest() throws InterruptedException {
+    public void addEventTest() throws InterruptedException {
+        HighlightsConfig_qaPageSteps.searchEventStep();
+        HighlightsConfig_qaPageSteps.addEventStep();
+        HighlightsConfig_qaPageSteps.checkTagEventStep();
+    }
+
+    //@Test
+    public void deleteEventTest1() throws InterruptedException {
         HighlightsConfig_qaPage.clickDeleteEvent();
         HighlightsConfig_qaPage.clickDeleteEvent();
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickSaveConfig();
     }
-
     @Test
-    public void addLanguageCustom() throws InterruptedException {
+    public void deleteEventTest() throws InterruptedException {
+        HighlightsConfig_qaPageSteps.deleteEventStep();
+    }
+    //@Test
+    public void addLanguageCustom1() throws InterruptedException {
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickEditeLanguageCustom();
         Thread.sleep(100L);
@@ -111,4 +122,10 @@ public class HMVTest {
         HighlightsConfig_qaPage.clickDeleteButtonLanguageCustom();
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
     }
+    @Test
+    public void addLanguageCustom() throws InterruptedException {
+        HighlightsConfig_qaPageSteps.addCustomLanguageStep();
+        HighlightsConfig_qaPageSteps.deleteCustomLanguageStep();
+    }
+
 }
