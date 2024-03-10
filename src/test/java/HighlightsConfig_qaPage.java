@@ -280,7 +280,7 @@ public class HighlightsConfig_qaPage {
         deleteButtonLanguageCustom.click();
     }
 
-    public String assertTextWhatAddSport() {
+    public static String assertTextWhatAddSport() {
         String sportAdded = assertWhatAddSport.getText();
         return sportAdded;
     }
