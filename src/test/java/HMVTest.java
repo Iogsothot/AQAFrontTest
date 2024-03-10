@@ -65,19 +65,11 @@ public class HMVTest {
 
         HighlightsConfig_qaPageSteps.addCustomLanguageStep();
         HighlightsConfig_qaPageSteps.deleteCustomLanguageStep();
-
+    }
 
     @Test
-    public void copyEvent() {
-        HighlightsConfig_qaPage.clickSelectLanguageDefault();
-        int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
-        HighlightsConfig_qaPage.clickSelectLanguage();
-        HighlightsConfig_qaPage.clickCopyEventFromDefault();
-        int eventNumber2 = HighlightsConfig_qaPage.checkEventList();
-        assertEquals(eventNumber1 ,eventNumber2);
-        String checkTextEvent = highlights.checkTextEvent();
-        assertEquals("Soccer", checkTextEvent);
-        logger.info("Список ивентов азербайджанского  совпадает с дефолтным");
+    public void copyEvent() throws InterruptedException {
+        HighlightsConfig_qaPageSteps.copyEventStep();
 
     }
 

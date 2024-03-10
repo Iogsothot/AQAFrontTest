@@ -2,6 +2,8 @@ import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class HighlightsConfig_qaPageSteps {
 
     HighlightsConfig_qaPage highlightsConfigQaPage = new HighlightsConfig_qaPage(HMVTest.driver);
@@ -98,5 +100,18 @@ public class HighlightsConfig_qaPageSteps {
         HighlightsConfig_qaPage.clickDeleteEvent();
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickSaveConfig();
+    }
+
+    @Step
+    public static void copyEventStep() throws InterruptedException {
+        HighlightsConfig_qaPage.clickSelectLanguageDefault();
+        int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
+        HighlightsConfig_qaPage.clickSelectLanguage();
+        HighlightsConfig_qaPage.clickCopyEventFromDefault();
+        int eventNumber2 = HighlightsConfig_qaPage.checkEventList();
+        assertEquals(eventNumber1 ,eventNumber2);
+        String checkTextEvent = HMVTest.highlights.checkTextEvent();
+        assertEquals("Soccer", checkTextEvent);
+
     }
 }
