@@ -38,14 +38,15 @@ public class HMVTest {
         driver.quit();
     }
 
-
-     @Test
+    @DisplayName("Добавление и удаление спорта Archery")
+    @Test
     public void addSportTest() throws InterruptedException {
 
         HighlightsConfig_qaPageSteps.addSportStep();
          HighlightsConfig_qaPageSteps.deleteAddSportStep();
      }
 
+    @DisplayName("Добавление ивентов по футболу и прооверка работы тэгов")
     @Test
     public void addEventTest() throws InterruptedException {
         HighlightsConfig_qaPageSteps.searchEventStep();
@@ -53,13 +54,14 @@ public class HMVTest {
         HighlightsConfig_qaPageSteps.checkTagEventStep();
     }
 
-
+    @DisplayName("Удаление ивентов")
     @Test
     public void deleteEventTest() throws InterruptedException {
         HighlightsConfig_qaPageSteps.deleteEventStep();
 
     }
 
+    @DisplayName("Добавление и удаление Custom Language")
     @Test
     public void addLanguageCustom() throws InterruptedException {
 
@@ -67,6 +69,7 @@ public class HMVTest {
         HighlightsConfig_qaPageSteps.deleteCustomLanguageStep();
     }
 
+    @DisplayName("Проверка копирования ивентов из Default Language")
     @Test
     public void copyEvent() throws InterruptedException {
         HighlightsConfig_qaPageSteps.copyEventStep();
