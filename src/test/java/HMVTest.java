@@ -1,17 +1,28 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
+
 import org.junit.jupiter.api.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 public class HMVTest {
     public static LoginPage loginPage;
     public static HighlightsConfig_qaPage highlights;
     public static WebDriver driver = new ChromeDriver();
-
+    private static final Logger logger = LoggerFactory.getLogger(HMVTest.class);
     @BeforeAll
     public static void main() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
@@ -22,7 +33,7 @@ public class HMVTest {
         HighlightsConfig_qaPageSteps.logInStep();
     }
 
-    @AfterAll
+   @AfterAll
     public static void destroy() {
         driver.quit();
     }
@@ -30,6 +41,7 @@ public class HMVTest {
 
      @Test
     public void addSportTest() throws InterruptedException {
+
         HighlightsConfig_qaPageSteps.addSportStep();
          HighlightsConfig_qaPageSteps.deleteAddSportStep();
      }
@@ -45,12 +57,28 @@ public class HMVTest {
     @Test
     public void deleteEventTest() throws InterruptedException {
         HighlightsConfig_qaPageSteps.deleteEventStep();
+
     }
 
     @Test
     public void addLanguageCustom() throws InterruptedException {
+
         HighlightsConfig_qaPageSteps.addCustomLanguageStep();
         HighlightsConfig_qaPageSteps.deleteCustomLanguageStep();
+
+
+    @Test
+    public void copyEvent() {
+        HighlightsConfig_qaPage.clickSelectLanguageDefault();
+        int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
+        HighlightsConfig_qaPage.clickSelectLanguage();
+        HighlightsConfig_qaPage.clickCopyEventFromDefault();
+        int eventNumber2 = HighlightsConfig_qaPage.checkEventList();
+        assertEquals(eventNumber1 ,eventNumber2);
+        String checkTextEvent = highlights.checkTextEvent();
+        assertEquals("Soccer", checkTextEvent);
+        logger.info("Список ивентов азербайджанского  совпадает с дефолтным");
+
     }
 
 }
