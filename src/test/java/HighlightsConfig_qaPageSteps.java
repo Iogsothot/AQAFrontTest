@@ -10,7 +10,7 @@ public class HighlightsConfig_qaPageSteps {
 
 
 
-    @Step("Вход в аккаунт")
+    @Step("Log in to account")
     public static void logInStep() throws InterruptedException {
     HMVTest.driver.get(ConfProperties.getProperty("loginpage"));
     Thread.sleep(1000l);
@@ -19,7 +19,7 @@ public class HighlightsConfig_qaPageSteps {
     LoginPage.inputPasswd(ConfProperties.getProperty("password"));
     LoginPage.clickLoginBtn();
     }
-    @Step("Добавление спорта и проверка на соответствие")
+    @Step("Adding sports and checking for compliance")
     public static void addSportStep() throws InterruptedException {
         HighlightsConfig_qaPage.clickSelectLanguage();
         HighlightsConfig_qaPage.clickAddSportButton();
@@ -31,7 +31,7 @@ public class HighlightsConfig_qaPageSteps {
         String sport = HighlightsConfig_qaPage.assertTextWhatAddSport();
         Assertions.assertEquals("Archery", sport);
     }
-    @Step("Удаление спорта")
+    @Step("Delete sport")
     public static void deleteAddSportStep() throws InterruptedException {
         HighlightsConfig_qaPage.clickDisableFourSport();
         HighlightsConfig_qaPage.clickDeleteDisableFourSport();
@@ -39,7 +39,7 @@ public class HighlightsConfig_qaPageSteps {
         HighlightsConfig_qaPage.clickSaveConfig();
     }
 
-    @Step("Увелечение филбтра по дате и поиск по футбольной каманде")
+    @Step("Increasing the filter by date and searching by football team")
     public static void searchEventStep() throws InterruptedException {
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickToDate();
@@ -49,13 +49,13 @@ public class HighlightsConfig_qaPageSteps {
         HighlightsConfig_qaPage.inputEvent(ConfProperties.getProperty("team"));
         HighlightsConfig_qaPage.clickSearchEventButton();
     }
-    @Step("Добавление ивентов")
+    @Step("Add event")
     public static void addEventStep() throws InterruptedException {
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickAddEvent();
         HighlightsConfig_qaPage.clickAddEvent();
     }
-    @Step("Добавление тэгов в ивенты ивентов")
+    @Step("Adding tags to event")
     public static void checkTagEventStep() throws InterruptedException {
         HighlightsConfig_qaPage.clickAddIsPromo1();
         HighlightsConfig_qaPage.clickAddIsPromo2();
@@ -67,7 +67,7 @@ public class HighlightsConfig_qaPageSteps {
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickSaveConfig();
     }
-    @Step("Добавление Custom Language")
+    @Step("Add Custom Language")
     public static void addCustomLanguageStep() throws InterruptedException {
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickEditeLanguageCustom();
@@ -81,7 +81,7 @@ public class HighlightsConfig_qaPageSteps {
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
     }
-    @Step("Удаление Custom Language")
+    @Step("Delete Custom Language")
     public static void deleteCustomLanguageStep() throws InterruptedException {
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickEditeLanguageCustom();
@@ -94,7 +94,7 @@ public class HighlightsConfig_qaPageSteps {
         HighlightsConfig_qaPage.clickDeleteButtonLanguageCustom();
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
     }
-    @Step("Удаление ивентов")
+    @Step("Delete ивентов")
     public static void deleteEventStep() throws InterruptedException {
         HighlightsConfig_qaPage.clickDeleteEvent();
         HighlightsConfig_qaPage.clickDeleteEvent();
@@ -102,7 +102,7 @@ public class HighlightsConfig_qaPageSteps {
         HighlightsConfig_qaPage.clickSaveConfig();
     }
 
-    @Step("Копирование ивентов")
+    @Step("Copy events")
     public static void copyEventStep() throws InterruptedException {
         HighlightsConfig_qaPage.clickSelectLanguageDefault();
         int eventNumber1 = HighlightsConfig_qaPage.checkEventList();
