@@ -133,6 +133,7 @@ public class HighlightsConfig_qaPageSteps {
     @Step("Delete Custom Language")
     public static void saveDeleteLanguageCustomStep() throws InterruptedException {
         HighlightsConfig_qaPage.clickDeleteButtonLanguageCustom();
+        Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickSaveLanguageCustom();
     }
     @Step("Delete events")

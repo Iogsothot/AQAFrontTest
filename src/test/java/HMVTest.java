@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class HMVTest {
     public static LoginPage loginPage;
     public static HighlightsConfig_qaPage highlights;
@@ -44,6 +44,7 @@ public class HMVTest {
 
     @DisplayName("Adding and Delete Archery Sports")
     @Test
+    @Order(1)
     public void addSportTest() throws InterruptedException {
         HighlightsConfig_qaPageSteps.selectLanguage();
         HighlightsConfig_qaPageSteps.addSportStep();
@@ -54,43 +55,44 @@ public class HMVTest {
 
     @DisplayName("Adding football events and verifying the operation of tags")
     @Test
+    @Order(2)
     public void addEventTest() throws InterruptedException {
         HighlightsConfig_qaPageSteps.filterByDate();
         HighlightsConfig_qaPageSteps.searchEventStep();
         HighlightsConfig_qaPageSteps.addTwoEventStep();
         HighlightsConfig_qaPageSteps.addIsPromoTagStep();
         HighlightsConfig_qaPageSteps.addIsSafeTagStep();
-    }
-
-    @DisplayName("Delete events")
-    @Test
-    public void deleteEventTest() throws InterruptedException {
-        HighlightsConfig_qaPageSteps.deleteEventStep();
 
     }
+
 
     @DisplayName("Adding and Delete Custom Language")
     @Test
+    @Order(3)
     public void addLanguageCustom() throws InterruptedException {
         HighlightsConfig_qaPageSteps.openListLanguageCustomStep();
         HighlightsConfig_qaPageSteps.selectLanguageCustomStep();
         HighlightsConfig_qaPageSteps.saveLanguageCustom();
     }
-    @DisplayName("Adding and Delete Custom Language")
-    @Test
-    public void deleteLanguageCustom() throws InterruptedException {
-        HighlightsConfig_qaPageSteps.openListLanguageCustomStep();
-        HighlightsConfig_qaPageSteps.selectLanguageCustomDeleteStep();
-        HighlightsConfig_qaPageSteps.saveDeleteLanguageCustomStep();
-    }
+
 
     @DisplayName("Checking for copying events from the Default Language")
     @Test
+    @Order(5)
     public void copyEvent() throws InterruptedException {
         HighlightsConfig_qaPageSteps.selectLanguageDefaultStep();
         HighlightsConfig_qaPageSteps.copyEventFromDefaultStep();
         HighlightsConfig_qaPageSteps.checkTextEventStep();
+        HighlightsConfig_qaPageSteps.deleteEventStep();
+        HighlightsConfig_qaPageSteps.saveLanguageCustom();
 
     }
-
+    @DisplayName("Delete Custom Language")
+    @Test
+    @Order(4)
+    public void deleteLanguageCustom() throws InterruptedException {
+        HighlightsConfig_qaPageSteps.deleteLanguageCustomStep();
+        HighlightsConfig_qaPageSteps.selectLanguageCustomDeleteStep();
+        HighlightsConfig_qaPageSteps.saveDeleteLanguageCustomStep();
+    }
 }
