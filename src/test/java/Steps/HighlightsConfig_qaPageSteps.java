@@ -88,7 +88,6 @@ public class HighlightsConfig_qaPageSteps {
         Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickAddIsSafe2();
         Thread.sleep(1000L);
-        HighlightsConfig_qaPage.clickSaveConfig();
     }
     @Step("Adding tags to event")
     public static void addIsSafeTagStep() throws InterruptedException {
@@ -99,7 +98,7 @@ public class HighlightsConfig_qaPageSteps {
 
     @Step("Add Custom Language")
     public static void openListLanguageCustomStep() throws InterruptedException {
-        Thread.sleep(100L);
+        Thread.sleep(1000L);
         HighlightsConfig_qaPage.clickEditeLanguageCustom();
         Thread.sleep(100L);
         HighlightsConfig_qaPage.clickOpenListLanguageCustom();
@@ -158,6 +157,6 @@ public class HighlightsConfig_qaPageSteps {
     public static void checkTextEventStep() throws InterruptedException {
 
         String checkTextEvent = HighlightsConfig_qaPage.checkTextEvent();
-        assertEquals((ConfProperties.getProperty("addsport")) , checkTextEvent);
+        assertEquals((ConfProperties.getProperty("copyevent")) , checkTextEvent);
     }
 }

@@ -62,6 +62,7 @@ public class HMVTest {
         HighlightsConfig_qaPageSteps.addTwoEventStep();
         HighlightsConfig_qaPageSteps.addIsPromoTagStep();
         HighlightsConfig_qaPageSteps.addIsSafeTagStep();
+        HighlightsConfig_qaPageSteps.saveConfigStep();
 
     }
 
@@ -70,6 +71,7 @@ public class HMVTest {
     @Test
     @Order(3)
     public void addLanguageCustom() throws InterruptedException {
+        HighlightsConfig_qaPageSteps.deleteEventStep();
         HighlightsConfig_qaPageSteps.openListLanguageCustomStep();
         HighlightsConfig_qaPageSteps.selectLanguageCustomStep();
         HighlightsConfig_qaPageSteps.saveLanguageCustom();
