@@ -1,4 +1,5 @@
-import org.apache.commons.io.filefilter.TrueFileFilter;
+package PageObjects;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -96,15 +97,15 @@ public class HighlightsConfig_qaPage {
     )
     private static WebElement openListLanguageCustom;
     @FindBy(
-            xpath = "/html/body/div[9]/div[3]/div/div[2]/div[3]/div[1]/div/span"
+            xpath = "/html/body/div[7]/div[3]/div/div[2]/div[3]/div[1]/div/span"
     )
     private static WebElement selectLanguageCustom1;
     @FindBy(
-            xpath = "/html/body/div[9]/div[3]/div/div[2]/div[3]/div[2]/div/span"
+            xpath = "/html/body/div[7]/div[3]/div/div[2]/div[3]/div[2]/div/span"
     )
     private static WebElement selectLanguageCustom2;
     @FindBy(
-            xpath = "/html/body/div[9]/div[3]/div/div[3]/button[2]"
+            xpath = "/html/body/div[7]/div[3]/div/div[3]/button[2]"
     )
     private static WebElement addLanguageCustom;
     @FindBy(
@@ -116,7 +117,7 @@ public class HighlightsConfig_qaPage {
     )
     private static WebElement deleteLanguageCustom;
     @FindBy(
-            xpath = "/html/body/div[9]/div[3]/div/div[2]/div[3]/div[1]/div/span"
+            xpath = "/html/body/div[7]/div[3]/div/div[2]/div[3]/div[1]/div/span"
     )
     private static WebElement selectLanguageCustomDelete1;
     @FindBy(
@@ -124,7 +125,7 @@ public class HighlightsConfig_qaPage {
     )
     private static WebElement selectLanguageCustomDelete2;
     @FindBy(
-            xpath = "/html/body/div[9]/div[3]/div/div[3]/button[2]"
+            xpath = "/html/body/div[7]/div[3]/div/div[3]/button[2]"
     )
     private static WebElement deleteButtonLanguageCustom;
     @FindBy(
@@ -299,7 +300,7 @@ public class HighlightsConfig_qaPage {
         return languageDelete;
     }
 
-    public String checkTextEvent() {
+    public static String checkTextEvent() {
         String checkTextEvent = checkEvent.getText();
         return checkTextEvent;
     }
