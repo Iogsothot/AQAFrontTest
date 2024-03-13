@@ -19,6 +19,10 @@ public class HighlightsConfig_qaPage {
     )
     private static WebElement addSportButton;
     @FindBy(
+            xpath = "//*[contains(text(), 'SUCCESS')]/.."
+    )
+    private static WebElement saveMassage ;
+    @FindBy(
             xpath = "//*[@id=\"root\"]/div[1]/div/div[1]/div[1]/div[2]/div/div/div[2]/div[6]/span"
     )
     private static WebElement selectSportButton;
@@ -283,7 +287,10 @@ public class HighlightsConfig_qaPage {
         String sportAdded = assertWhatAddSport.getText();
         return sportAdded;
     }
-
+    public static String assertTextSaveMassage() {
+        String saveMassageText = saveMassage.getText();
+        return saveMassageText;
+    }
     public String assertTextWhatAddLanguage() {
         String languageAdded = assertWhatAddLanguage.getText();
         return languageAdded;

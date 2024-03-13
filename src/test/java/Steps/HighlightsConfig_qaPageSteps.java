@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class HighlightsConfig_qaPageSteps {
 
@@ -33,6 +34,9 @@ public class HighlightsConfig_qaPageSteps {
     @Step("Save config step")
     public static void saveConfigStep() throws InterruptedException {
         HighlightsConfig_qaPage.clickSaveConfig();
+        String saveMassage = HighlightsConfig_qaPage.assertTextSaveMassage();
+        assertEquals( "SUCCESS\n" +
+                "The config was saved successfully",saveMassage);
         Thread.sleep(10000L);
     }
     @Step("Assert sport name step")
