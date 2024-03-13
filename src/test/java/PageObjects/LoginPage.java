@@ -1,10 +1,8 @@
 package PageObjects;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 public class LoginPage {
     public WebDriver driver;
     @FindBy(
@@ -37,8 +35,8 @@ public class LoginPage {
         loginField.sendKeys(new CharSequence[]{login});
     }
 
-    public static void inputPasswd(String passwd) {
-        passwdField.sendKeys(new CharSequence[]{passwd});
+    public static void inputPasswd(String password)  {
+        passwdField.sendKeys(new CharSequence[]{password});
     }
 
     public static void clickLoginBtn() {

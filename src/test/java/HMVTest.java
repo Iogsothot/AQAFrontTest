@@ -1,31 +1,25 @@
 import PageObjects.HighlightsConfig_qaPage;
 import PageObjects.LoginPage;
 import Steps.HighlightsConfig_qaPageSteps;
+import Utilit.ConfProperties;
 import io.github.bonigarcia.wdm.WebDriverManager;
-
-
-
 import org.junit.jupiter.api.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class HMVTest {
+
+
     public static LoginPage loginPage;
     public static HighlightsConfig_qaPage highlights;
     public static HighlightsConfig_qaPageSteps steps;
     public static WebDriver driver = new ChromeDriver();
-    private static final Logger logger = LoggerFactory.getLogger(HMVTest.class);
+
     @BeforeAll
     public static void presteps() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
@@ -34,17 +28,26 @@ public class HMVTest {
         steps = new HighlightsConfig_qaPageSteps(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        HighlightsConfig_qaPageSteps.logInStep();
     }
 
    @AfterAll
     public static void destroy() {
         driver.quit();
     }
-
-    @DisplayName("Adding and Delete Archery Sports")
+    @DisplayName("Auth Test")
     @Test
     @Order(1)
+    public  void logInTest() throws InterruptedException {
+        driver.get(ConfProperties.getProperty("loginpage"));
+        Thread.sleep(1000l);
+        LoginPage.clickCookiesBtn();
+        LoginPage.inputLogin(ConfProperties.getProperty("login"));
+        LoginPage.inputPasswd(ConfProperties.getProperty("password"));
+        LoginPage.clickLoginBtn();
+    }
+    @DisplayName("Adding and Delete Archery Sports Test")
+    @Test
+    @Order(2)
     public void addSportTest() throws InterruptedException {
         HighlightsConfig_qaPageSteps.selectLanguage();
         HighlightsConfig_qaPageSteps.addSportStep();
@@ -53,9 +56,9 @@ public class HMVTest {
         HighlightsConfig_qaPageSteps.deleteAddSportStep();
      }
 
-    @DisplayName("Adding football events and verifying the operation of tags")
+    @DisplayName("Adding football events and verifying the operation of tags Test")
     @Test
-    @Order(2)
+    @Order(3)
     public void addEventTest() throws InterruptedException {
         HighlightsConfig_qaPageSteps.filterByDate();
         HighlightsConfig_qaPageSteps.searchEventStep();
@@ -67,9 +70,9 @@ public class HMVTest {
     }
 
 
-    @DisplayName("Adding and Delete Custom Language")
+    @DisplayName("Adding and Delete Custom Language Test")
     @Test
-    @Order(3)
+    @Order(4)
     public void addLanguageCustom() throws InterruptedException {
         HighlightsConfig_qaPageSteps.deleteEventStep();
         HighlightsConfig_qaPageSteps.openListLanguageCustomStep();
@@ -78,20 +81,20 @@ public class HMVTest {
     }
 
 
-    @DisplayName("Checking for copying events from the Default Language")
+    @DisplayName("Checking for copying events from the Default Language Test")
     @Test
-    @Order(5)
+    @Order(6)
     public void copyEvent() throws InterruptedException {
         HighlightsConfig_qaPageSteps.selectLanguageDefaultStep();
         HighlightsConfig_qaPageSteps.copyEventFromDefaultStep();
         HighlightsConfig_qaPageSteps.checkTextEventStep();
         HighlightsConfig_qaPageSteps.deleteEventStep();
-        HighlightsConfig_qaPageSteps.saveLanguageCustom();
+        HighlightsConfig_qaPageSteps.saveConfigStep();
 
     }
-    @DisplayName("Delete Custom Language")
+    @DisplayName("Delete Custom Language Test")
     @Test
-    @Order(4)
+    @Order(5)
     public void deleteLanguageCustom() throws InterruptedException {
         HighlightsConfig_qaPageSteps.deleteLanguageCustomStep();
         HighlightsConfig_qaPageSteps.selectLanguageCustomDeleteStep();
